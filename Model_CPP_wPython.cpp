@@ -82,8 +82,7 @@ int main() {
     Py_Initialize();
 
     // Import the Python module
-    pModule = PyImport_ImportModule("your_python_module");  // Replace "your_python_module" with the actual name of your Python module
-    if (!pModule) {
+    pModule = PyImport_ImportModule("model");  // Call Python model as a module
         std::cerr << "Failed to import the Python module." << std::endl;
         return 1;
     }

@@ -107,7 +107,7 @@ int main() {
     Py_XDECREF(pModule);
 
     // Use the valueTuple in the C++ code
-    double value_StagCoord = /* Fill in your value here */;
+    double value_StagCoord = ;
 
     Predictor predictor(valueTuple, value_StagCoord);
 
@@ -119,7 +119,7 @@ int main() {
     }
 
     // Test the functions
-    double T = /* Fill in your value here */;
+    double T = ;
 
     std::vector<double> tempScaled = predictor.TempPredict(T, x);
     std::vector<double> pressScaled = predictor.PressPredict(T, x);

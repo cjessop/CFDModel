@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-#include <Python.h>
+#include <python3.h/Python.h>
 
 class Predictor {
 private:

@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 #!/usr/bin/env python
 # coding: utf-8
 
@@ -401,17 +403,17 @@ extrapolate_run2_x = extrapolate_run2['Points:0']
 extrapolate_run2_t = extrapolate_run2['Temperature']
 
 
-def mag_calc_vel(df):
-    mag_list_vel = []
-    for i in range(0, len(df)):
-        v_x = df['Velocity Mag:0']
-        v_y = df['Velocity Mag:1']
-        v_z = df['Velocity Mag:2']
-        magnitude = np.sqrt(v_x[i]**2 + v_y[i]**2 + v_z[i]**2)
-        print(magnitude)
-        mag_list_vel.append(magnitude)
+# def mag_calc_vel(df):
+#     mag_list_vel = []
+#     for i in range(0, len(df)):
+#         v_x = df['Velocity Mag:0']
+#         v_y = df['Velocity Mag:1']
+#         v_z = df['Velocity Mag:2']
+#         magnitude = np.sqrt(v_x[i]**2 + v_y[i]**2 + v_z[i]**2)
+#         print(magnitude)
+#         mag_list_vel.append(magnitude)
         
-    return mag_list_vel
+#     return mag_list_vel
 
 
 # In[37]:
@@ -420,7 +422,7 @@ def mag_calc_vel(df):
 Validation_run = pd.read_csv('ValidationTest.csv')
 validation_run_t = Validation_run['Temperature']
 validation_run_p = Validation_run['Pressure']
-validation_run_v = mag_calc_vel(Validation_run)
+# validation_run_v = mag_calc_vel(Validation_run)
 
 
 # In[ ]:
@@ -438,108 +440,108 @@ validation_run_v = mag_calc_vel(Validation_run)
 # In[86]:
 
 
-def TempPredict_Val(T, x):
-    #self.CalcStagVals()
-    if x <= 0.05:
-        TempScaled_Val = T
-        #print(x)
-    else:
-        TempScaled_Val = ((3796 * x**2) - (1.002e+04 * x) + T)
-    return TempScaled_Val
+# def TempPredict_Val(T, x):
+#     #self.CalcStagVals()
+#     if x <= 0.05:
+#         TempScaled_Val = T
+#         #print(x)
+#     else:
+#         TempScaled_Val = ((3796 * x**2) - (1.002e+04 * x) + T)
+#     return TempScaled_Val
         
-def PressPredict_Val(P, x):
-    if x <= 0.05:
-        PressScaled_Val = 0
-    else:
-        PressScaled_Val = (90000 * np.exp(-i / 40))
-    return PressScaled_Val
+# def PressPredict_Val(P, x):
+#     if x <= 0.05:
+#         PressScaled_Val = 0
+#     else:
+#         PressScaled_Val = (90000 * np.exp(-i / 40))
+#     return PressScaled_Val
         
-def VelPredict_Val(V, x):
-    if x <= 0.05:
-        VelScaled_Val = V
-    else:
-        VelScaled_Val = ((-936.7 * x**2) + (1982 * x) + (V/1.2))
-    return VelScaled_Val
+# def VelPredict_Val(V, x):
+#     if x <= 0.05:
+#         VelScaled_Val = V
+#     else:
+#         VelScaled_Val = ((-936.7 * x**2) + (1982 * x) + (V/1.2))
+#     return VelScaled_Val
 
 
-# In[87]:
+# # In[87]:
 
 
-print(VelPredict_Val(7600, 0.5))
+# print(VelPredict_Val(7600, 0.5))
 
 
 # In[88]:
 
 
-TempTest_Validation = []
+# TempTest_Validation = []
 
-for i in range(0, len(extrapolate_run2_x)):
-    #print(i)
-    TempValue = TempPredict_Val(8100, extrapolate_run2_x[i])
-    TempTest_Validation.append(TempValue)
-# print(TempTest_Validation)
-# print(len(extrapolate_run2_x))
+# for i in range(0, len(extrapolate_run2_x)):
+#     #print(i)
+#     TempValue = TempPredict_Val(8100, extrapolate_run2_x[i])
+#     TempTest_Validation.append(TempValue)
+# # print(TempTest_Validation)
+# # print(len(extrapolate_run2_x))
 
-PressureTest_Validation = []
+# PressureTest_Validation = []
 
-for i in range(0, len(extrapolate_run2_x)):
-    PressValue = PressPredict_Val(25000, extrapolate_run2_x[i])
-    PressureTest_Validation.append(PressValue)
-#print(len(PressureTest_Validation))
+# for i in range(0, len(extrapolate_run2_x)):
+#     PressValue = PressPredict_Val(25000, extrapolate_run2_x[i])
+#     PressureTest_Validation.append(PressValue)
+# #print(len(PressureTest_Validation))
 
-VelTest_Validation = []
+# VelTest_Validation = []
 
-for i in range(0, len(extrapolate_run2_x)):
+# for i in range(0, len(extrapolate_run2_x)):
     
-    VelValue = VelPredict_Val(7600, extrapolate_run2_x[i])
+#     VelValue = VelPredict_Val(7600, extrapolate_run2_x[i])
     
-    VelTest_Validation.append(VelValue)
-print(VelTest_Validation)
+#     VelTest_Validation.append(VelValue)
+# print(VelTest_Validation)
 
 
-# In[89]:
+# # In[89]:
 
 
-plt.plot(extrapolate_run2_x, validation_run_t)
-plt.plot(extrapolate_run2_x, TempTest_Validation)
-plt.grid()
-plt.minorticks_on()
-plt.legend(["CFD Run", "Model Run"], loc ="upper right", prop={'size': 14})
+# plt.plot(extrapolate_run2_x, validation_run_t)
+# plt.plot(extrapolate_run2_x, TempTest_Validation)
+# plt.grid()
+# plt.minorticks_on()
+# plt.legend(["CFD Run", "Model Run"], loc ="upper right", prop={'size': 14})
 
 
-# In[90]:
+# # In[90]:
 
 
-plt.plot(extrapolate_run2_x, validation_run_p)
-plt.plot(extrapolate_run2_x, PressureTest_Validation)
-plt.grid()
-plt.minorticks_on()
-plt.legend(["CFD Run", "Model Run"], loc ="upper right", prop={'size': 14})
+# plt.plot(extrapolate_run2_x, validation_run_p)
+# plt.plot(extrapolate_run2_x, PressureTest_Validation)
+# plt.grid()
+# plt.minorticks_on()
+# plt.legend(["CFD Run", "Model Run"], loc ="upper right", prop={'size': 14})
 
 
-# In[92]:
+# # In[92]:
 
 
-plt.plot(extrapolate_run2_x, validation_run_v)
-plt.plot(extrapolate_run2_x, VelTest_Validation)
-plt.grid()
-plt.minorticks_on()
-plt.legend(["CFD Run", "Model Run"], loc ="upper right", prop={'size': 14})
+# plt.plot(extrapolate_run2_x, validation_run_v)
+# plt.plot(extrapolate_run2_x, VelTest_Validation)
+# plt.grid()
+# plt.minorticks_on()
+# plt.legend(["CFD Run", "Model Run"], loc ="upper right", prop={'size': 14})
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
+# # In[ ]:
 
 
 
 
 
-# In[188]:
+# # In[ ]:
+
+
+
+
+
+# # In[188]:
 
 
 while True:
